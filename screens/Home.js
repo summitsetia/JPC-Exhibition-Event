@@ -1,70 +1,73 @@
-import React from 'react'
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable, TouchableOpacity, } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Video } from 'expo-av';
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
-        
-        <View style={styles.videoContainer}>
-          <Video
-            source={require('../videos/background.mp4')}
-            style={styles.backgroundVideo}
-            resizeMode={ResizeMode.COVER}
-            shouldPlay
-            isLooping 
-          />
-        </View>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>JPC EXHIBITION EVENT</Text>
-        </View>
-        <TouchableOpacity
-        onPress={() => {navigation.navigate("InfoScreen")}}
-        >
-            <Text>Go to description</Text>
-        </TouchableOpacity>
-        <StatusBar style="auto" />
+      <View style={styles.videoContainer}>
+        <Video
+          source={require('../videos/background.mp4')}
+          style={styles.backgroundVideo}
+          resizeMode="cover"
+          shouldPlay
+          isLooping
+        />
       </View>
-  )
-}
+      {/* Button Container */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={() => { navigation.navigate("InfoScreen") }}>
+          <Text style={styles.button}>Description</Text>
+        </TouchableOpacity>
+      </View>
 
+      {/* Header */}
+      <View style={styles.header}>
+        <Text style={styles.headerText}>JPC EXHIBITION EVENT</Text>
+      </View>
+      <StatusBar style="auto" />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'dodgerblue',
-      alignItems: 'center',
-      justifyContent: 'center', 
-    },
-    header: {
-      backgroundColor: 'white',
-      padding: 15,
-      flexDirection: 'row',
-      alignItems: 'flex-start',
-      borderRadius: 100,
-      overflow: 'hidden',
-      position: 'absolute',
-      top: 50, 
-      zIndex: 1, 
-    },
-    headerText: {
-      fontSize: 20,
-    },
-    videoContainer: {
-      flex: 1,
-      width: '100%',
-      height: '100%',
-      position: 'relative',
-      zIndex: 0, 
-    },
-    backgroundVideo: {
-      flex: 1,
-      width: '100%',
-      height: '100%',
-    },
-  
-    
-  });
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  videoContainer: {
+    position: 'absolute', 
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: -1, 
+  },
+  backgroundVideo: {
+    flex: 1,
+  },
+  header: {
+    marginTop: -765,
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  buttonContainer: {
+    position: 'absolute', 
+    bottom: 25, 
+    left: 20,
+  },
+  button: {
+    backgroundColor: '#1167b1',
+    color: 'white',
+    fontSize: 18,
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+  },
+});
 
-export default Home
+export default Home;
