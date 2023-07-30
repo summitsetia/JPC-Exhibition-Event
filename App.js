@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from "./screens/Home";
 import Description from "./screens/Description";
+import Comment from "./screens/Comment";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ export default function App() {
 >
         <Stack.Screen name="HomeScreen" component={Home}/>
         <Stack.Screen name="InfoScreen" component={Description}/>
+        <Stack.Screen name="Comment" component={Comment}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
