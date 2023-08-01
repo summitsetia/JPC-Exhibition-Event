@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Video } from 'expo-av';
 
 const Home = ({ navigation }) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const onLikePress = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.videoContainer}>
@@ -22,8 +28,11 @@ const Home = ({ navigation }) => {
       </View>
       <View style={styles.verticalBar}>
         <View style={styles.verticalBarItem}>
-          <TouchableOpacity onPress={() => { /* Handle heart icon press */ }}>
-            <Image style={styles.verticalBarIcon} source={require('../Images/heart.png')} />
+          <TouchableOpacity onPress={onLikePress}>
+            <Image
+              style={[styles.verticalBarIcon, isLiked && styles.heartIconLiked]}
+              source={require('../Images/heart.png')}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.verticalBarItem}>
@@ -44,6 +53,7 @@ const Home = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -90,15 +100,18 @@ const styles = StyleSheet.create({
   verticalBar: {
     position: 'absolute',
     right: 8,
-    bottom: 100,
+    bottom: 45,
   },
   verticalBarItem: {
     marginBottom: 24,
     alignItems: 'center',
   },
   verticalBarIcon: {
-    width: 32,
-    height: 32,
+    width: 48,
+    height: 48,
+  },
+  heartIconLiked: {
+    tintColor: 'red', 
   },
 });
 
