@@ -28,12 +28,13 @@ const Home = ({ navigation }) => {
       </View>
       <View style={styles.verticalBar}>
         <View style={styles.verticalBarItem}>
-          <TouchableOpacity onPress={onLikePress}>
+          <TouchableOpacity onPress={onLikePress} style={styles.likeContainer}>
             <Image
               style={[styles.verticalBarIcon, isLiked && styles.heartIconLiked]}
               source={require('../Images/heart.png')}
             />
           </TouchableOpacity>
+          <Text style={styles.iconText}>2000</Text>
         </View>
         <View style={styles.verticalBarItem}>
           <TouchableOpacity onPress={() => { navigation.navigate("Comment") }}>
@@ -53,7 +54,6 @@ const Home = ({ navigation }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -112,6 +112,14 @@ const styles = StyleSheet.create({
   },
   heartIconLiked: {
     tintColor: 'red', 
+  },
+  iconText: {
+    color: 'white',
+    marginTop: 4,
+  },
+  likeContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
   },
 });
 
