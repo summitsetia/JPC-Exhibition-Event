@@ -23,7 +23,7 @@ const Home = ({ navigation }) => {
   }, [])
 
   const incrementLikeCount = async () => {
-    const newLikesCount = isLiked ? likesCount - 1 : likesCount + 1;
+    const newLikesCount = likesCount + 1
     
     const { data, error } = await supabase
       .from('posts')
@@ -36,8 +36,13 @@ const Home = ({ navigation }) => {
 
   const onLikePress = async () => {
     await incrementLikeCount();
-    setIsLiked(!isLiked);
+    setIsLiked(true);
   };
+
+  setTimeout(() => {
+    setIsLiked(false); 
+  }, 5000); 
+
 
   return (
     <View style={styles.container}>
