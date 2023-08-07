@@ -1,12 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Video } from 'expo-av';
+import { supabase } from '../supabase';
 
 const Home = ({ navigation }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
 
-  const onLikePress = () => {
+  const fetchLikeCount = async () => {
+    console.log("fetchlikecount function is called")
+    const { data, error } = await supabase
+      .from('posts')
+      .select('likes_count')
+      .eq('id', 1)
+      .single();
+    setLikesCount(data.likes_count)
+  };
+
+  useEffect(() => {
+    fetchLikeCount();
+  }, [])
+
+  const incrementLikeCount = async () => {
+    const newLikesCount = isLiked ? likesCount - 1 : likesCount + 1;
+    
+    const { data, error } = await supabase
+      .from('posts')
+      .upsert([{ id: 1, likes_count: newLikesCount }], { onConflict: ['id'] }); 
+
+    if (!error) {
+      setLikesCount(newLikesCount);
+    }
+  };
+
+  const onLikePress = async () => {
+    await incrementLikeCount();
     setIsLiked(!isLiked);
   };
 
@@ -34,17 +63,19 @@ const Home = ({ navigation }) => {
               source={require('../Images/heart.png')}
             />
           </TouchableOpacity>
-          <Text style={styles.iconText}>2000</Text>
+          <Text style={styles.iconText}>{likesCount}</Text>
         </View>
         <View style={styles.verticalBarItem}>
-          <TouchableOpacity onPress={() => { navigation.navigate("Comment") }}>
+          <TouchableOpacity onPress={() => { navigation.navigate("Comment") }} style={styles.likeContainer}>
             <Image style={styles.verticalBarIcon} source={require('../Images/comments.png')} />
           </TouchableOpacity>
+          <Text style={styles.iconText}>0</Text>
         </View>
         <View style={styles.verticalBarItem}>
-          <TouchableOpacity onPress={() => { /* Handle heart icon press */ }}>
+          <TouchableOpacity onPress={() => { /* Handle heart icon press */ }} style={styles.likeContainer}> 
             <Image style={styles.verticalBarIcon} source={require('../Images/reply.png')} />
           </TouchableOpacity>
+          <Text style={styles.iconText}>0</Text>
         </View>
       </View>
       <View style={styles.header}>
