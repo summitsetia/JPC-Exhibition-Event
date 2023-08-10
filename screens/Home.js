@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Pressable, FlatList } from 'react-native';
 import { Video } from 'expo-av';
 import { supabase } from '../supabase';
 
@@ -27,21 +27,22 @@ const Home = ({ navigation }) => {
     
     const { data, error } = await supabase
       .from('posts')
-      .upsert([{ id: 1, likes_count: newLikesCount }], { onConflict: ['id'] }); 
+      .upsert([{ id: 1, likes_count: newLikesCount }]); 
 
     if (!error) {
       setLikesCount(newLikesCount);
+      
     }
   };
 
   const onLikePress = async () => {
     await incrementLikeCount();
     setIsLiked(true);
-  };
 
-  setTimeout(() => {
-    setIsLiked(false); 
-  }, 5000); 
+    setTimeout(() => {
+      setIsLiked(false); 
+    }, 3000); 
+  };
 
 
   return (
@@ -62,12 +63,12 @@ const Home = ({ navigation }) => {
       </View>
       <View style={styles.verticalBar}>
         <View style={styles.verticalBarItem}>
-          <TouchableOpacity onPress={onLikePress} style={styles.likeContainer}>
+          <Pressable onPress={onLikePress} style={styles.likeContainer}>
             <Image
               style={[styles.verticalBarIcon, isLiked && styles.heartIconLiked]}
               source={require('../Images/heart.png')}
             />
-          </TouchableOpacity>
+          </Pressable>
           <Text style={styles.iconText}>{likesCount}</Text>
         </View>
         <View style={styles.verticalBarItem}>
@@ -77,7 +78,7 @@ const Home = ({ navigation }) => {
           <Text style={styles.iconText}>0</Text>
         </View>
         <View style={styles.verticalBarItem}>
-          <TouchableOpacity onPress={() => { /* Handle heart icon press */ }} style={styles.likeContainer}> 
+          <TouchableOpacity  style={styles.likeContainer}> 
             <Image style={styles.verticalBarIcon} source={require('../Images/reply.png')} />
           </TouchableOpacity>
           <Text style={styles.iconText}>0</Text>
