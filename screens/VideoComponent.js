@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Pressable, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Pressable, Dimensions} from 'react-native';
 import { Video } from 'expo-av';
 import { supabase } from '../supabase';
 
-const Home = ({ navigation }) => {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const VideoComponent = ({ navigation, videoId, videoLink }) => {
+
   const [isLiked, setIsLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
 
@@ -13,7 +17,7 @@ const Home = ({ navigation }) => {
     const { data, error } = await supabase
       .from('posts')
       .select('likes_count')
-      .eq('id', 1)
+      .eq('id', videoId)
       .single();
     setLikesCount(data.likes_count)
   };
@@ -27,7 +31,7 @@ const Home = ({ navigation }) => {
     
     const { data, error } = await supabase
       .from('posts')
-      .upsert([{ id: 1, likes_count: newLikesCount }]); 
+      .upsert([{ id: videoId, likes_count: newLikesCount }]); 
 
     if (!error) {
       setLikesCount(newLikesCount);
@@ -49,7 +53,7 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.videoContainer}>
         <Video
-          source={require('../videos/background.mp4')}
+          source={videoLink}
           style={styles.backgroundVideo}
           resizeMode="cover"
           shouldPlay
@@ -97,6 +101,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height:windowHeight,
+    width:windowWidth
   },
   videoContainer: {
     position: 'absolute', 
@@ -160,4 +166,20 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default VideoComponent;
+
+// import { View, Text, Dimensions } from 'react-native'
+// import React from 'react'
+
+// const windowWidth = Dimensions.get('window').width;
+// const windowHeight = Dimensions.get('window').height;
+
+// const VideoComponent = ({ video }) => {
+//   return (
+//     <View style={{backgroundColor:"black", height:windowHeight, width:windowWidth}}>
+//         <Text>{video}</Text>
+//     </View>
+//   );
+// };
+
+// export default VideoComponent;
