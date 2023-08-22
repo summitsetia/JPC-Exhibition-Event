@@ -18,7 +18,7 @@ export default function App() {
   }}
 >
         <Stack.Screen name="HomeScreen" component={HomeScreen}/>
-        <Stack.Screen name="InfoScreen" component={Description}/>
+        <Stack.Screen name="Description" component={Description}/>
         <Stack.Screen name="Comment" component={Comment}/>
       </Stack.Navigator>
     </NavigationContainer>

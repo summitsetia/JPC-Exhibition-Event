@@ -61,7 +61,7 @@ const VideoComponent = ({ navigation, videoId, videoLink }) => {
         />
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => { navigation.navigate("InfoScreen") }}>
+        <TouchableOpacity onPress={() => { navigation.navigate("Description", { videoId: videoId }) }}>
           <Text style={styles.button}>Description</Text>
         </TouchableOpacity>
       </View>
@@ -167,19 +167,3 @@ const styles = StyleSheet.create({
 });
 
 export default VideoComponent;
-
-// import { View, Text, Dimensions } from 'react-native'
-// import React from 'react'
-
-// const windowWidth = Dimensions.get('window').width;
-// const windowHeight = Dimensions.get('window').height;
-
-// const VideoComponent = ({ video }) => {
-//   return (
-//     <View style={{backgroundColor:"black", height:windowHeight, width:windowWidth}}>
-//         <Text>{video}</Text>
-//     </View>
-//   );
-// };
-
-// export default VideoComponent;
