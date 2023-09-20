@@ -79,13 +79,13 @@ const VideoComponent = ({ navigation, videoId, videoLink }) => {
           <TouchableOpacity onPress={() => { navigation.navigate("Comment") }} style={styles.likeContainer}>
             <Image style={styles.verticalBarIcon} source={require('../Images/comments.png')} />
           </TouchableOpacity>
-          <Text style={styles.iconText}>0</Text>
+          <Text style={styles.iconText}>20</Text>
         </View>
         <View style={styles.verticalBarItem}>
           <TouchableOpacity  style={styles.likeContainer}> 
             <Image style={styles.verticalBarIcon} source={require('../Images/reply.png')} />
           </TouchableOpacity>
-          <Text style={styles.iconText}>0</Text>
+          <Text style={styles.iconText}>12</Text>
         </View>
       </View>
       <View style={styles.header}>

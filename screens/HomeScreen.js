@@ -5,17 +5,17 @@ import VideoComponent from './VideoComponent';
 data = [
   {
     id: 1,
-    filename: require('../videos/background.mp4'),
+    filename: require('../videos/chocolate.mov'),
     title: 'Video 1',
   },
   {
     id: 2,
-    filename: require('../videos/background2.mp4'),
+    filename: require('../videos/mango.mov'),
     title: 'Video 2',
   },
   {
     id: 3,
-    filename: require('../videos/background3.mp4'),
+    filename: require('../videos/pina.mov'),
     title: 'Video 3',
   },
 ];

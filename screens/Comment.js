@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { supabase } from '../supabase';
 
-const Comment = ({ navigation }) => {
+const Comment = ({ navigation, videoId }) => {
     return (
         <View style={styles.container}>
       <View style={styles.buttonContainer}>
