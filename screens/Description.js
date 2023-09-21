@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   topContainer: {
-    flex: 1, // Adjust the flex value as needed
+    flex: 1, 
     alignItems: 'center',
     justifyContent: 'center',
     borderTopWidth: 2,
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'black',
     width: '48%',
-    height: 200, // 2x larger than before
+    height: 200, 
   },
   headerText: {
     fontSize: 24,
