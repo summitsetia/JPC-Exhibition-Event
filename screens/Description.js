@@ -40,27 +40,6 @@ const Description = ({ route, navigation }) => {
       </View>
       
       <View style={styles.bottomContainer}>
-        {/* {videoId === 1 && (
-          <>
-            <Image source={require("../Images/1a.jpg")} style={styles.outlineLarge} />
-            <Image source={require("../Images/1b.jpg")} style={styles.outlineLarge} />
-          </>
-        )}
-
-        {videoId === 2 && (
-          <>
-            <Image source={require("../Images/2a.jpg")} style={styles.outlineLarge} />
-            <Image source={require("../Images/2b.jpg")} style={styles.outlineLarge} />
-          </>
-        )}
-
-        {videoId === 3 && (
-          <>
-            <Image source={require("../Images/3a.jpg")} style={styles.outlineLarge} />
-            <Image source={require("../Images/3b.jpg")} style={styles.outlineLarge} />
-          </>
-        )} */}
-
           <Image source={imageA} style={styles.outlineLarge} />
           <Image source={imageB} style={styles.outlineLarge} />
        
@@ -81,6 +60,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 22,
     borderRadius: 8,
+    fontFamily: 'AmericanTypewriter-Bold'
   },
   container: {
     flex: 1,
@@ -111,17 +91,18 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'black',
     width: '48%',
-    height: 200, 
+    height: 300, 
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
   },
   descriptionText: {
-    fontSize: 16,
+    fontSize: 20,
     textAlign: 'center',
     paddingHorizontal: 20,
     marginTop: 10,
+    fontFamily: 'American Typewriter'
   },
 });
 

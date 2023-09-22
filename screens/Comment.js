@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'; 
-import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput, FlatList, SafeAreaView } from 'react-native';
 import { supabase } from '../supabase';
 
 const Comment = ({ route, navigation }) => {
@@ -21,7 +21,7 @@ const Comment = ({ route, navigation }) => {
 
   useEffect(() => {
     fetchComments();
-  }, []); 
+  }, []);
 
   const submitComment = async () => {
     if (commentText.trim() === '') {
@@ -33,7 +33,7 @@ const Comment = ({ route, navigation }) => {
       .upsert([
         {
           post_id: videoId,
-          comment_text: commentText, 
+          comment_text: commentText,
         },
       ]);
 
@@ -44,8 +44,17 @@ const Comment = ({ route, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {console.log(videoId)}
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={comments}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.commentContainer}>
+            <Text style={styles.commentText}>{item.comment_text}</Text>
+          </View>
+        )}
+      />
+
       <TextInput
         style={styles.input}
         placeholder="Add a comment..."
@@ -53,13 +62,13 @@ const Comment = ({ route, navigation }) => {
         onChangeText={(text) => setCommentText(text)}
         onSubmitEditing={submitComment}
       />
-      
+
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={() => { navigation.navigate("HomeScreen") }}>
           <Text style={styles.button}>Home</Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -71,24 +80,36 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 22,
     borderRadius: 8,
+    fontFamily: 'AmericanTypewriter-Bold'
   },
 
   buttonContainer: {
-    position: 'absolute', 
-    bottom: 25, 
+    position: 'absolute',
+    bottom: 25,
     left: 20,
+  },
+
+  commentContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'black',
+    padding: 10,
+  },
+
+  commentText: {
+    fontSize: 16,
   },
 
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end', 
     alignItems: 'center',
+    paddingBottom: '10'
   },
-  
+
   input: {
     height: 40,
     margin: 12,
-    borderWidth: 1,
+    borderWidth: 3,
     padding: 10,
   }
 });
